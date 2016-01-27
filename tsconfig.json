@@ -1,0 +1,10 @@
+{
+    "compilerOptions":{
+        "outDir":"./dist/",
+        "target":"ES5"
+    },
+    "files":[
+        "./simple_asym/master.ts",
+        "./simple_asym/worker.ts"
+    ]
+}
