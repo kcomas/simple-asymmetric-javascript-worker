@@ -22,11 +22,12 @@ var master = (function () {
     master.prototype.exec = function (name, args) {
         var _this = this;
         if (args === void 0) { args = {}; }
-        this._worker.postMessage(JSON.stringify({ cmd: name, args: args }));
+        var id = new Date().getTime();
+        this._worker.postMessage(JSON.stringify({ cmd: name, args: args, id: id }));
         return new Promise(function (resolve, reject) {
             _this._worker.onmessage = function (event) {
                 var data = JSON.parse(event.data);
-                if (data.cmd === name) {
+                if (data.id === id) {
                     resolve(data.rst);
                 }
             };

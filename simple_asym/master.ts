@@ -28,11 +28,12 @@ class master {
      * @return {Promise} a promise when the command is completed
      */
     exec(name:string,args:any={}): any {
-        this._worker.postMessage(JSON.stringify({cmd:name,args:args}));
+        var id = new Date().getTime();
+        this._worker.postMessage(JSON.stringify({cmd:name,args:args,id:id}));
         return new Promise((resolve,reject)=>{
             this._worker.onmessage = (event) => {
                 var data = JSON.parse(event.data);
-                if(data.cmd === name){
+                if(data.id === id){
                     resolve(data.rst);
                 }
             };

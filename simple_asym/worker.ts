@@ -38,13 +38,14 @@ declare function postMessage(args:any): any;
  * Post a message back to the master
  * @param {string} name - the name of the arg executed
  * @param {object} rst - the result of the function
+ * @param {number} id - the timestamp of the command
  */
-var post = (name:string, rst:any) => {
+var post = (name:string, rst:any, id:Number) => {
     lock = false;
     if(typeof rst !== 'object'){
         rst = {status:rst};
     }
-    postMessage(JSON.stringify({cmd:name,rst:rst}));
+    postMessage(JSON.stringify({cmd:name,rst:rst,id:id}));
 };
 
 /**
@@ -315,8 +316,9 @@ var waitLoop = () => {
         if(queue.length > 0 && !lock){
             var action = queue.shift();
             lock = true;
+            var id = action.id;
             var rst = crypt[action.cmd](action.args);
-            post(action.cmd,rst);
+            post(action.cmd,rst,id);
         }
         waitLoop();
     },100);
