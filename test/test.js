@@ -43,3 +43,21 @@ describe('Testing Encryption And Decryption',function(){
         });
     },20000);
 });
+
+describe('Tesing Passphrase',function(){
+    it('Should Generate and Decrypt private keys',function(done){
+        var asym = new master();
+        asym.exec('make_rsa_keys_with_passphrase').then(function(rst){
+            asym.exec('private_key').then(function(rst2){
+                var pri = rst2.private_key;
+                asym = new master();
+                asym.exec('set_private_key',{passphrase:rst.passphrase, private_key:rst.private_key}).then(function(rst){
+                    asym.exec('private_key').then(function(rst2){
+                        expect(rst2.private_key).toEqual(pri);
+                        done();
+                    });
+                });
+            });
+        });
+    });
+});
