@@ -59,5 +59,5 @@ describe('Tesing Passphrase',function(){
                 });
             });
         });
-    });
+    },20000);
 });

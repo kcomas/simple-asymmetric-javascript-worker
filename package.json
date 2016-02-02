@@ -1,7 +1,6 @@
 {
   "name": "simple-asymmetric-javascript",
   "version": "1.0.0",
-  "private": "true",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kcomas/simple-asymmetric-javascript.git"
+    "url": "git+https://github.com/kcomas/simple-asymmetric-javascript-worker.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kcomas/simple-asymmetric-javascript/issues"
+    "url": "https://github.com/kcomas/simple-asymmetric-javascript-worker/issues"
   },
-  "homepage": "https://github.com/kcomas/simple-asymmetric-javascript#readme",
+  "homepage": "https://github.com/kcomas/simple-asymmetric-javascript-worker#readme",
   "devDependencies": {
     "jasmine": "^2.4.1",
     "typescript": "^1.7.5"
