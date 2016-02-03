@@ -23,17 +23,14 @@ var master = (function () {
          * @type {number}
          */
         this._id = 0;
-        var aes_keyPromise = 1;
-        var public_keyPromise = 1;
-        var private_keyPromise = 1;
         if (aes_key) {
-            aes_keyPromise = this.exec('set_aes_key', { aes_key: aes_key });
+            this.exec('set_aes_key', { aes_key: aes_key });
         }
         if (public_key) {
-            public_keyPromise = this.exec('set_public_key', { public_key: public_key });
+            this.exec('set_public_key', { public_key: public_key });
         }
         if (private_key) {
-            private_keyPromise = this.exec('set_private_key', { private_key: private_key });
+            this.exec('set_private_key', { private_key: private_key });
         }
     }
     /**

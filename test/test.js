@@ -33,7 +33,7 @@ describe('Alice And Bob Example',function(){
 describe('Testing Encryption And Decryption',function(){
     it('Should Encrypt And Decrypt',function(done){
         var asym = new master(aes_key,public_key,private_key);
-        var msg = "hello";
+        var msg = 'hello';
         asym.exec('encrypt',{text:msg}).then(function(rst){
             expect(rst.ciphertext).not.toEqual(msg);
             asym.exec('decrypt',{ciphertext:rst.ciphertext}).then(function(rst){
@@ -60,4 +60,18 @@ describe('Tesing Passphrase',function(){
             });
         });
     },20000);
+});
+
+describe('Testing Exceptions',function(){
+    it('Should Throw Errors',function(done){
+        var asym = new master();
+        asym.exec('encrypt',{text:'foo'});
+        var asym = new master();
+        asym.exec('decrypt',{ciphertext:'foo'});
+        var asym = new master();
+        asym.exec('rsa_encrypt',{text:'foo'});
+        var asym = new master();
+        asym.exec('rsa_decrypt',{ciphertext:'foo'});
+        done();
+    });
 });

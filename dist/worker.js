@@ -1,4 +1,19 @@
 "use strict";
+/**
+ * Error for missing aes key
+ * @type {Error}
+ */
+var MissingAESException = new Error('Missing AES key. Set or generate one');
+/**
+ * Error for missing public key
+ * @type {Error}
+ */
+var MissingRSAPublicException = new Error('Missing public RSA key. Set or generate one to use RSA encryption');
+/**
+ * Error for missing private key
+ * @type {Error}
+ */
+var MissingRSAPrivateException = new Error('Missing private RSA key. Set or generate one to use RSA decrypt');
 importScripts('/dist/lib/forge.bundle.js');
 importScripts('/dist/lib/fernetBrowser.js');
 /**
@@ -182,6 +197,10 @@ var AsymCrypt = (function () {
      * @return {object(ciphertext:string)} - the encrypted text
      */
     AsymCrypt.prototype.rsa_encrypt = function (args) {
+        if (!this._public_key) {
+            throw MissingRSAPublicException;
+            return false;
+        }
         var encrypted = this._public_key.encrypt(args.text, 'RSA-OAEP', {
             mgf1: {
                 md: forge.md.sha1.create()
@@ -199,6 +218,10 @@ var AsymCrypt = (function () {
      * @return {object(text:string)} - the decrypted text
      */
     AsymCrypt.prototype.rsa_decrypt = function (args) {
+        if (!this._private_key) {
+            throw MissingRSAPrivateException;
+            return false;
+        }
         if (args.use_base64) {
             args.ciphertext = forge.util.decode64(args.ciphertext);
         }
@@ -215,6 +238,10 @@ var AsymCrypt = (function () {
      * @return {object(ciphertext:string} the encrypted text
      */
     AsymCrypt.prototype.encrypt = function (args) {
+        if (!this._aes_key) {
+            throw MissingAESException;
+            return false;
+        }
         var token = new fernet.Token({
             secret: new fernet.Secret(this._aes_key),
         });
@@ -226,6 +253,10 @@ var AsymCrypt = (function () {
      * @return {object(text:string)} the decrypted text
      */
     AsymCrypt.prototype.decrypt = function (args) {
+        if (!this._aes_key) {
+            throw MissingAESException;
+            return false;
+        }
         var token = new fernet.Token({
             secret: new fernet.Secret(this._aes_key),
             token: args.ciphertext,

@@ -2,6 +2,24 @@
 "use strict"
 
 /**
+ * Error for missing aes key
+ * @type {Error}
+ */
+var MissingAESException = new Error('Missing AES key. Set or generate one');
+
+/**
+ * Error for missing public key
+ * @type {Error}
+ */
+var MissingRSAPublicException = new Error('Missing public RSA key. Set or generate one to use RSA encryption');
+
+/**
+ * Error for missing private key
+ * @type {Error}
+ */
+var MissingRSAPrivateException = new Error('Missing private RSA key. Set or generate one to use RSA decrypt');
+
+/**
  * The node forge class
  * @type {forge}
  */
@@ -239,6 +257,10 @@ class AsymCrypt {
       * @return {object(ciphertext:string)} - the encrypted text
       */
      rsa_encrypt(args:any): any {
+        if(!this._public_key){
+            throw MissingRSAPublicException;
+            return false;
+        }
         var encrypted = this._public_key.encrypt(args.text, 'RSA-OAEP', {
             mgf1: {
                 md: forge.md.sha1.create()
@@ -257,6 +279,10 @@ class AsymCrypt {
       * @return {object(text:string)} - the decrypted text
       */
      rsa_decrypt(args:any): any {
+        if(!this._private_key){
+            throw MissingRSAPrivateException;
+            return false;
+        }
         if(args.use_base64){
             args.ciphertext = forge.util.decode64(args.ciphertext);
         }
@@ -274,6 +300,10 @@ class AsymCrypt {
       * @return {object(ciphertext:string} the encrypted text
       */
      encrypt(args:any): any {
+        if(!this._aes_key){
+            throw MissingAESException;
+            return false;
+        }
         var token = new fernet.Token({
             secret: new fernet.Secret(this._aes_key),
         });
@@ -286,6 +316,10 @@ class AsymCrypt {
       * @return {object(text:string)} the decrypted text
       */
      decrypt(args:any): any {
+        if(!this._aes_key){
+            throw MissingAESException;
+            return false;
+        }
         var token = new fernet.Token({
             secret: new fernet.Secret(this._aes_key),
             token: args.ciphertext,
