@@ -1,8 +1,8 @@
 {
   "name": "simple-asymmetric-javascript",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "",
-  "main": "index.js",
+  "main": "simple_asym/master.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

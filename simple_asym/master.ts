@@ -22,20 +22,9 @@ class master {
 
     /**
      * Init
-     * @param {string} aes_key - the aes key
-     * @param {string} public_key - the public key
-     * @param {string} private_key - the private key
      */
-    constructor(private aes_key:string, private public_key: string, private private_key: string) {
-        if(aes_key){
-           this.exec('set_aes_key',{aes_key:aes_key});
-        }
-        if(public_key){
-            this.exec('set_public_key',{public_key:public_key});
-        }
-        if(private_key){
-            this.exec('set_private_key',{private_key:private_key});
-        }
+    constructor() {
+
     }
 
     /**
@@ -58,3 +47,5 @@ class master {
     }
 
 }
+
+export default  master;

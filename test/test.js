@@ -32,7 +32,10 @@ describe('Alice And Bob Example',function(){
 
 describe('Testing Encryption And Decryption',function(){
     it('Should Encrypt And Decrypt',function(done){
-        var asym = new master(aes_key,public_key,private_key);
+        var asym = new master();
+        asym.exec('set_aes_key',{aes_key:aes_key});
+        asym.exec('set_private_key',{private_key:private_key});
+        asym.exec('set_public_key',{public_key:public_key});
         var msg = 'hello';
         asym.exec('encrypt',{text:msg}).then(function(rst){
             expect(rst.ciphertext).not.toEqual(msg);

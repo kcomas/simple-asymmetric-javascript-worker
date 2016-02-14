@@ -5,14 +5,8 @@
 var master = (function () {
     /**
      * Init
-     * @param {string} aes_key - the aes key
-     * @param {string} public_key - the public key
-     * @param {string} private_key - the private key
      */
-    function master(aes_key, public_key, private_key) {
-        this.aes_key = aes_key;
-        this.public_key = public_key;
-        this.private_key = private_key;
+    function master() {
         /**
          * The web worker for encryption
          * @type {Worker}
@@ -23,15 +17,6 @@ var master = (function () {
          * @type {number}
          */
         this._id = 0;
-        if (aes_key) {
-            this.exec('set_aes_key', { aes_key: aes_key });
-        }
-        if (public_key) {
-            this.exec('set_public_key', { public_key: public_key });
-        }
-        if (private_key) {
-            this.exec('set_private_key', { private_key: private_key });
-        }
     }
     /**
      * Send a command to the worker
@@ -55,3 +40,4 @@ var master = (function () {
     };
     return master;
 })();
+exports.default = master;
