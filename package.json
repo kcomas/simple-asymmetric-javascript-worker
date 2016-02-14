@@ -17,11 +17,11 @@
   },
   "homepage": "https://github.com/kcomas/simple-asymmetric-javascript-worker#readme",
   "devDependencies": {
-    "jasmine": "^2.4.1",
-    "typescript": "^1.7.5"
+    "jasmine": "*",
+    "typescript": "*"
   },
   "dependencies": {
-    "fernet": "^0.3.0",
-    "node-forge": "^0.6.38"
+    "fernet": "*",
+    "node-forge": "*"
   }
 }
