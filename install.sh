@@ -12,3 +12,5 @@ cd ../..
 cp ./node_modules/node-forge/js/forge.bundle.js ./dist/lib
 cp ./node_modules/fernet/fernetBrowser.js ./dist/lib
 tsc --module commonjs
+cd ./dist/lib
+sed -i 's/global.fernet=e()/self.fernet=e()/g' fernetBrowser.js
