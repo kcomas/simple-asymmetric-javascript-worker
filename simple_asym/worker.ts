@@ -128,10 +128,15 @@ class AsymCrypt {
 
     /**
      * Get the private key as a pem file
+     * @property {string} passphrase - the passphrase to encrypt the private key with
      * @return {object(private_key:string)} - the key as a pem file
      */
     private_key(args:any): any {
-        return {private_key:forge.pki.privateKeyToPem(this._private_key)};
+        if(args.passphrase){
+            return {private_key:forge.pki.encryptRsaPrivateKey(this._private_key,args.passphrase)};
+        } else {
+            return {private_key:forge.pki.privateKeyToPem(this._private_key)};
+        }
     }
 
     /**
