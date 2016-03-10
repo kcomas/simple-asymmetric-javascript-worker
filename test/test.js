@@ -27,7 +27,7 @@ describe('Alice And Bob Example',function(){
                 });
             });
         });
-    },40000);
+    },100000);
 });
 
 describe('Testing Encryption And Decryption',function(){
@@ -44,7 +44,7 @@ describe('Testing Encryption And Decryption',function(){
                 done();
             });
         });
-    },40000);
+    },100000);
 });
 
 describe('Tesing Passphrase',function(){
@@ -62,7 +62,7 @@ describe('Tesing Passphrase',function(){
                 });
             });
         });
-    },40000);
+    },100000);
 });
 
 describe('Testing Exceptions',function(){
@@ -76,5 +76,16 @@ describe('Testing Exceptions',function(){
         var asym = new master();
         asym.exec('rsa_decrypt',{ciphertext:'foo'});
         done();
+    });
+});
+
+describe('Testing Hashing', function(){
+    it('Should make a hash', function(done){
+        var asym = new master();
+        asym.exec('generate_hash',{password:'test', numIterations: 24000}).then(function(hashObj){
+            console.dir(hashObj);
+            expect(typeof hashObj.salt).toEqual('string');
+            done();
+        });
     });
 });

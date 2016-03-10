@@ -119,6 +119,25 @@ class AsymCrypt {
     }
 
     /**
+     * Encrypt a password based on a salt and number of iterations
+     * @property {string} password - the password to encrypt
+     * @property {string} salt - the salt as a hex string
+     * @property {number} numIterations - the number of iterations to use for hashing
+     * @return {object(hash:string, salt:string)}
+     * @property {string} hash - the users hash
+     * @property {string} salt- the users salt
+     */
+    generate_hash(args:any): any {
+        if(args.salt){
+            var salt = forge.util.hexToBytes(args.salt);
+        } else {
+            var salt = forge.random.getBytesSync(128);
+        }
+        var derivedKey = forge.pkcs5.pbkdf2(args.password, salt, args.numIterations, 16);
+        return { hash: derivedKey, salt: forge.util.bytesToHex(salt) };
+    }
+
+    /**
      * Get the public key as a pem file
      * @return {object(public_key:string)} - the key as a pem file
      */
