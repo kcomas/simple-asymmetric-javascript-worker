@@ -27,7 +27,7 @@ describe('Alice And Bob Example',function(){
                 });
             });
         });
-    },20000);
+    },40000);
 });
 
 describe('Testing Encryption And Decryption',function(){
@@ -44,7 +44,7 @@ describe('Testing Encryption And Decryption',function(){
                 done();
             });
         });
-    },20000);
+    },40000);
 });
 
 describe('Tesing Passphrase',function(){
@@ -62,7 +62,7 @@ describe('Tesing Passphrase',function(){
                 });
             });
         });
-    },20000);
+    },40000);
 });
 
 describe('Testing Exceptions',function(){

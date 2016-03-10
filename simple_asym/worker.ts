@@ -176,7 +176,7 @@ class AsymCrypt {
      */
     make_rsa_keys(args:any): any{
         if(!args.bits){
-            args.bits = 2048;
+            args.bits = 4096;
         }
         var keypair = forge.rsa.generateKeyPair({ bits: args.bits, e: 0x10001 });
         this._private_key = keypair.privateKey;
@@ -197,7 +197,7 @@ class AsymCrypt {
      */
     make_rsa_keys_with_passphrase(args:any): any {
         if(!args.bits){
-            args.bits = 2048;
+            args.bits = 4096;
         }
         var passphrase = this._generate_passphrase();
         var obj:keyObj = this.make_rsa_keys({passphrase:passphrase,bits:args.bits});
