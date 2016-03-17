@@ -134,7 +134,7 @@ class AsymCrypt {
             var salt = forge.random.getBytesSync(128);
         }
         var derivedKey = forge.pkcs5.pbkdf2(args.password, salt, args.numIterations, 16);
-        return { hash: derivedKey, salt: forge.util.bytesToHex(salt) };
+        return { hash: forge.util.bytesToHex(derivedKey), salt: forge.util.bytesToHex(salt) };
     }
 
     /**

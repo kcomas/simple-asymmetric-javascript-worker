@@ -82,7 +82,7 @@ describe('Testing Exceptions',function(){
 describe('Testing Hashing', function(){
     it('Should make a hash', function(done){
         var asym = new master();
-        asym.exec('generate_hash',{password:'test', numIterations: 24000}).then(function(hashObj){
+        asym.exec('generate_hash', {password: 'test', numIterations: 24000}).then(function(hashObj){
             console.dir(hashObj);
             expect(typeof hashObj.salt).toEqual('string');
             done();
