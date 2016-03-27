@@ -197,7 +197,7 @@ class AsymCrypt {
         if(!args.bits){
             args.bits = 4096;
         }
-        var keypair = forge.rsa.generateKeyPair({ bits: args.bits, e: 0x10001 });
+        var keypair = forge.rsa.generateKeyPair({ bits: args.bits, e: 0x10001, workers: -1 });
         this._private_key = keypair.privateKey;
         this._public_key = keypair.publicKey;
         var obj:keyObj = {};
