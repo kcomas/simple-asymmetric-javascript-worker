@@ -1,6 +1,6 @@
 {
   "name": "simple-asymmetric-javascript",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "",
   "main": "simple_asym/master.ts",
   "scripts": {
