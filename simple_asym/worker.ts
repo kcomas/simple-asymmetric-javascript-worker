@@ -379,7 +379,7 @@ var waitLoop = () => {
             post(action.cmd,rst,id);
         }
         waitLoop();
-    },100);
+    },50);
 };
 
 waitLoop();
